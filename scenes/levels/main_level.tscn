@@ -7,9 +7,17 @@
 [ext_resource type="PackedScene" uid="uid://bdv0b0nfrg87j" path="res://scenes/characters/knight.tscn" id="3_hn3as"]
 [ext_resource type="Texture2D" uid="uid://bc2kjxs0disqs" path="res://assets/art/ui/Battleground/Bright/Battleground2.png" id="4_h35hl"]
 [ext_resource type="Texture2D" uid="uid://e47sx8b5q8f6" path="res://assets/art/ui/summer/2.png" id="5_geiq8"]
+[ext_resource type="Shader" uid="uid://chwbuqege5j1e" path="res://shaders/crt_effect.gdshader" id="8_h35hl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ojqrr"]
 size = Vector2(1214, 51)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kwk8y"]
+shader = ExtResource("8_h35hl")
+shader_parameter/curvature = 0.1
+shader_parameter/scanline_count = 300.0
+shader_parameter/scanline_opacity = 0.25
+shader_parameter/grille_opacity = 0.1
 
 [node name="MainLevel" type="Node2D" unique_id=1280248476]
 script = ExtResource("1_lx3qq")
@@ -73,6 +81,11 @@ scale = Vector2(2.0052083, 0.91975313)
 texture = ExtResource("5_geiq8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1249994804]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1388939218]
+material = SubResource("ShaderMaterial_kwk8y")
+offset_right = 1157.0
+offset_bottom = 675.0
 
 [node name="StateLabel" type="Label" parent="CanvasLayer" unique_id=140714891]
 offset_left = 14.0
