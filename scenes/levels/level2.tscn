@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://6pv6bnkk2vtx"]
+
+[ext_resource type="Script" uid="uid://b5clci78b8ycw" path="res://scriptsDika/levels/level2.gd" id="1_sqrei"]
+[ext_resource type="Texture2D" uid="uid://dkxd61q325wqf" path="res://assets/background/testParallax2/background.png" id="2_yhrca"]
+[ext_resource type="Texture2D" uid="uid://gwjmtxrur4pc" path="res://assets/background/testParallax2/layer1.png" id="3_4eecq"]
+[ext_resource type="Texture2D" uid="uid://cdnu5nxmgjwhn" path="res://assets/background/testParallax2/layer2.png" id="4_b3p8y"]
+[ext_resource type="Texture2D" uid="uid://jliled8vjvas" path="res://assets/background/testParallax2/jalan.png" id="5_bxuut"]
+[ext_resource type="Texture2D" uid="uid://d0xo2de2rqrs5" path="res://assets/background/testParallax2/lampu_tiang.png" id="6_g04qb"]
+[ext_resource type="PackedScene" uid="uid://bs66w6uidtn8f" path="res://scenes/characters/shaneleech.tscn" id="9_4eecq"]
+[ext_resource type="PackedScene" uid="uid://dodjathdg5op2" path="res://scenes/characters/charlotte.tscn" id="9_yhrca"]
+[ext_resource type="Script" uid="uid://dq5tnrr5yaiht" path="res://scriptsDika/characters/charlotte.gd" id="10_4eecq"]
+[ext_resource type="Script" uid="uid://bal37mclduiu5" path="res://scriptsDika/characters/shaneleech.gd" id="10_b3p8y"]
+[ext_resource type="PackedScene" uid="uid://dww7u4uq62xbb" path="res://scenes/objects/mana_altar.tscn" id="12_hgky1"]
+[ext_resource type="Shader" uid="uid://chwbuqege5j1e" path="res://shaders/crt_effect.gdshader" id="17_hlvfl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yt6xa"]
+size = Vector2(9150, 601)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u6dm2"]
+shader = ExtResource("17_hlvfl")
+shader_parameter/curvature = 0.1
+shader_parameter/scanline_count = 300.0
+shader_parameter/scanline_opacity = 0.25
+shader_parameter/grille_opacity = 0.1
+shader_parameter/glitch_intensity = 0.0
+
+[node name="Level2" type="Node2D" unique_id=468585990]
+script = ExtResource("1_sqrei")
+
+[node name="TestParallax" type="Node2D" parent="." unique_id=1553940942]
+
+[node name="Layer1" type="Parallax2D" parent="TestParallax" unique_id=696097659]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(1324.8, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="TestParallax/Layer1" unique_id=1206501445]
+scale = Vector2(2.3, 2.3)
+texture = ExtResource("2_yhrca")
+centered = false
+
+[node name="Layer2" type="Parallax2D" parent="TestParallax" unique_id=730335862]
+scroll_scale = Vector2(0.3, 0.3)
+repeat_size = Vector2(1324.8, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="TestParallax/Layer2" unique_id=1573355164]
+scale = Vector2(2.3, 2.3)
+texture = ExtResource("3_4eecq")
+centered = false
+
+[node name="Layer3" type="Parallax2D" parent="TestParallax" unique_id=1666067650]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(1324.8, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="TestParallax/Layer3" unique_id=1729518392]
+scale = Vector2(2.3, 2.3)
+texture = ExtResource("4_b3p8y")
+centered = false
+
+[node name="Layer4" type="Parallax2D" parent="TestParallax" unique_id=1709175374]
+scroll_scale = Vector2(0.7, 0.7)
+repeat_size = Vector2(1324.8, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="TestParallax/Layer4" unique_id=2013472059]
+scale = Vector2(2.3, 2.3)
+texture = ExtResource("5_bxuut")
+centered = false
+
+[node name="Layer5" type="Parallax2D" parent="TestParallax" unique_id=239751226]
+scroll_scale = Vector2(0.8, 0.8)
+repeat_size = Vector2(1324.8, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="TestParallax/Layer5" unique_id=105466041]
+scale = Vector2(2.3, 2.3)
+texture = ExtResource("6_g04qb")
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1335617422]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1174025645]
+position = Vector2(1493, 990.5)
+shape = SubResource("RectangleShape2D_yt6xa")
+
+[node name="CharacterManager" type="Node2D" parent="." unique_id=1851331316]
+
+[node name="Charlotte" parent="CharacterManager" unique_id=1432867270 instance=ExtResource("9_yhrca")]
+z_index = 1
+position = Vector2(503, 215)
+script = ExtResource("10_4eecq")
+max_mana = 5
+character_name = "Charlotte"
+dream_dimension_name = "Hutan Dongeng"
+max_hp = 5
+speed = 400.0
+jump_velocity = -600.0
+base_gravity_multiplier = 1.0
+
+[node name="ShaneLeech" parent="CharacterManager" unique_id=1441538568 instance=ExtResource("9_4eecq")]
+position = Vector2(143, 212)
+script = ExtResource("10_b3p8y")
+character_name = "Shane Leech"
+dream_dimension_name = "Kota Metropolitan"
+
+[node name="DimensionManager" type="Node2D" parent="." unique_id=33687486]
+
+[node name="ForestEnvironment" type="Node2D" parent="DimensionManager" unique_id=983306458]
+
+[node name="ManaAltar" parent="DimensionManager/ForestEnvironment" unique_id=76059911 instance=ExtResource("12_hgky1")]
+position = Vector2(725, 625)
+scale = Vector2(2, 2)
+
+[node name="RealityEnvironment" type="Node2D" parent="DimensionManager" unique_id=1433508839]
+
+[node name="MetropolitanEnvironment" type="Node2D" parent="DimensionManager" unique_id=1492881708]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1096387199]
+
+[node name="InfoLabel" type="Label" parent="CanvasLayer" unique_id=2018193959]
+offset_right = 486.0
+offset_bottom = 120.0
+text = "TEST"
+
+[node name="InfoLabelDimension" type="Label" parent="CanvasLayer" unique_id=1589295813]
+offset_top = 45.0
+offset_right = 486.0
+offset_bottom = 120.0
+text = "Dimension : "
+
+[node name="InfoLabelCharacter" type="Label" parent="CanvasLayer" unique_id=491708689]
+offset_top = 90.0
+offset_right = 486.0
+offset_bottom = 120.0
+text = "Character : "
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=47991857]
+material = SubResource("ShaderMaterial_u6dm2")
+offset_right = 1280.0
+offset_bottom = 720.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1242849506]
+scale = Vector2(2, 2)
+offset = Vector2(0, -200)

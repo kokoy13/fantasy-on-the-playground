@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dodjathdg5op2"]
+
+[ext_resource type="Script" uid="uid://cr7x28rt67xyg" path="res://scripts/astronaut.gd" id="1_puo7b"]
+[ext_resource type="Texture2D" uid="uid://bkwar2n2lybtu" path="res://assets/art/dreams/charlotte/Countess_Vampire/Idle.png" id="2_yuohk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2fiy5"]
+radius = 30.0
+height = 104.0
+
+[node name="Charlotte" type="CharacterBody2D" unique_id=1432867270]
+script = ExtResource("1_puo7b")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1571167053]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_yuohk")
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=868591796]
+position = Vector2(-2, 44)
+shape = SubResource("CapsuleShape2D_2fiy5")

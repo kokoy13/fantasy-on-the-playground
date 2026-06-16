@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dww7u4uq62xbb"]
+
+[ext_resource type="Texture2D" uid="uid://cmg66i58fybdc" path="res://assets/art/dreams/altar/PNG/Objects.png" id="1_8uqwx"]
+[ext_resource type="Script" uid="uid://b8scxfbvwp8ra" path="res://scriptsDika/objects/mana_altar.gd" id="1_802eg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8uqwx"]
+size = Vector2(27, 65)
+
+[node name="ManaAltar" type="Node2D" unique_id=76059911]
+script = ExtResource("1_802eg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=50638216]
+texture = ExtResource("1_8uqwx")
+hframes = 5
+vframes = 5
+
+[node name="Area2D" type="Area2D" parent="." unique_id=87953188]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1706948439]
+position = Vector2(1.5, 4.5)
+shape = SubResource("RectangleShape2D_8uqwx")

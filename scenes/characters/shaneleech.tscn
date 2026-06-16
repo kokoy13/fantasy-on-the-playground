@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bs66w6uidtn8f"]
+
+[ext_resource type="Texture2D" uid="uid://dnji12pp0bger" path="res://assets/art/dreams/charlotte/Converted_Vampire/Idle.png" id="1_1iqc3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2fiy5"]
+radius = 30.0
+height = 114.0
+
+[node name="ShaneLeech" type="CharacterBody2D" unique_id=1432867270]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1571167053]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_1iqc3")
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=868591796]
+position = Vector2(-7, 39)
+shape = SubResource("CapsuleShape2D_2fiy5")
