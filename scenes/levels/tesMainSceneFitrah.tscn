@@ -13,9 +13,16 @@
 [ext_resource type="Script" uid="uid://bcexnydcmnj10" path="res://scripts/dimension_manager.gd" id="10_t8ony"]
 [ext_resource type="Texture2D" uid="uid://d0b0bbss0ps5a" path="res://icon.svg" id="11_m6nvp"]
 [ext_resource type="PackedScene" uid="uid://cfpuo5qppqmh5" path="res://scenes/objects/miniRocket.tscn" id="12_6x837"]
+[ext_resource type="Script" uid="uid://d00ds6bmek0v1" path="res://scripts/environments/moon_environment.gd" id="12_7clut"]
+[ext_resource type="Script" uid="uid://0ayakeo3xj17" path="res://scripts/environments/warzone_environment.gd" id="14_8bfvf"]
+[ext_resource type="Script" uid="uid://bn5py8nhnhpx6" path="res://scripts/objects/meteor_area.gd" id="14_jq0gj"]
+[ext_resource type="PackedScene" uid="uid://ch2irgt7ujihm" path="res://scenes/objects/meteor.tscn" id="15_jq0gj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yt6xa"]
-size = Vector2(4728, 601)
+size = Vector2(9150, 601)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7clut"]
+size = Vector2(6172.5, 877.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u6dm2"]
 shader = ExtResource("7_wgf5c")
@@ -83,7 +90,7 @@ centered = false
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1335617422]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1174025645]
-position = Vector2(827, 990.5)
+position = Vector2(1493, 990.5)
 shape = SubResource("RectangleShape2D_yt6xa")
 
 [node name="CharacterManager" type="Node2D" parent="." unique_id=1851331316]
@@ -106,6 +113,7 @@ position = Vector2(81, 396)
 texture = ExtResource("11_m6nvp")
 
 [node name="MoonEnvironment" type="Node2D" parent="DimensionManager" unique_id=1962103698]
+script = ExtResource("12_7clut")
 
 [node name="Sprite2D" type="Sprite2D" parent="DimensionManager/MoonEnvironment" unique_id=256924334]
 position = Vector2(507, 412)
@@ -114,7 +122,17 @@ texture = ExtResource("11_m6nvp")
 [node name="MiniRocket" parent="DimensionManager/MoonEnvironment" unique_id=1454662715 instance=ExtResource("12_6x837")]
 position = Vector2(757, 176)
 
+[node name="MeteorArea" type="Area2D" parent="DimensionManager/MoonEnvironment" unique_id=588717998]
+script = ExtResource("14_jq0gj")
+meteor_scene = ExtResource("15_jq0gj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DimensionManager/MoonEnvironment/MeteorArea" unique_id=462644646]
+position = Vector2(2222.75, 149.25)
+shape = SubResource("RectangleShape2D_7clut")
+debug_color = Color(0.8518062, 0.32359734, 0.48211014, 0.41960785)
+
 [node name="WarzoneEnvironment" type="Node2D" parent="DimensionManager" unique_id=22137430]
+script = ExtResource("14_8bfvf")
 
 [node name="Sprite2D" type="Sprite2D" parent="DimensionManager/WarzoneEnvironment" unique_id=23872021]
 position = Vector2(147.23438, 376.5)

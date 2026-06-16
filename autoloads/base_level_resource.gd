@@ -237,7 +237,10 @@ func update_dimension_mechanics() -> void:
 	for env_node in dimension_manager.get_children():
 		if env_node is Node2D:
 			if env_node.name == target_env_name:
-				set_node_state_recursive(env_node, true, true)
+				if env_node.has_method("set_environment_state"):
+					env_node.set_environment_state(true, false)
+				else:
+					set_node_state_recursive(env_node, true, true)
 			else:
 				var is_frozen_dream = false
 				if env_node.name == "MoonEnvironment" and dream_freeze_timers.get("Armstrong", 0.0) <= 0.0:
@@ -245,10 +248,39 @@ func update_dimension_mechanics() -> void:
 				elif env_node.name == "WarzoneEnvironment" and dream_freeze_timers.get("Arthur", 0.0) <= 0.0:
 					is_frozen_dream = true
 				
-				if is_frozen_dream:
-					set_node_state_recursive(env_node, true, false)
+				if env_node.has_method("set_environment_state"):
+					if is_frozen_dream:
+						env_node.set_environment_state(true, true)
+					else:
+						env_node.set_environment_state(false, false)
 				else:
-					set_node_state_recursive(env_node, false, true)
+					if is_frozen_dream:
+						set_node_state_recursive(env_node, true, false)
+					else:
+						set_node_state_recursive(env_node, false, true)
+
+	for child in character_manager.get_children():
+		if child is BaseCharacterResource:
+			if not is_in_dream_dimension:
+				child.visible = true
+				child.modulate.a = 1.0
+				child.set_physics_process(true)
+				
+				var driver_collision = child.get_node_or_null("CollisionShape2D")
+				if driver_collision:
+					driver_collision.disabled = false
+			else:
+				if child == active_character:
+					child.visible = true
+					child.modulate.a = 1.0
+					child.set_physics_process(true)
+					
+					var driver_collision = child.get_node_or_null("CollisionShape2D")
+					if driver_collision:
+						driver_collision.disabled = false
+				else:
+					child.visible = false
+					child.set_physics_process(false)
 
 	for child in character_manager.get_children():
 		if child is BaseCharacterResource:

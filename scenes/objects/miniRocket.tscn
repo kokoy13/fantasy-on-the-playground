@@ -11,6 +11,7 @@ size = Vector2(116, 159)
 
 [node name="MiniRocket" type="CharacterBody2D" unique_id=1454662715]
 collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_bri08")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=101174390]
@@ -23,6 +24,7 @@ position = Vector2(1, -1.5)
 shape = SubResource("RectangleShape2D_bri08")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1376731237]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2143772895]
 position = Vector2(2, -4.5)

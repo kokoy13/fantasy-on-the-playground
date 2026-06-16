@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ch2irgt7ujihm"]
+
+[ext_resource type="Texture2D" uid="uid://d0b0bbss0ps5a" path="res://icon.svg" id="1_8xfb5"]
+[ext_resource type="Script" uid="uid://bs66fkotbrwpc" path="res://scripts/objects/meteor.gd" id="1_tgeul"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xfb5"]
+size = Vector2(117, 113)
+
+[node name="Meteor" type="Area2D" unique_id=1674301451]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_tgeul")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1334500774]
+modulate = Color(0.15127608, 0.15127608, 0.15127608, 1)
+texture = ExtResource("1_8xfb5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=83676952]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_8xfb5")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=946044620]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1932032520]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_8xfb5")

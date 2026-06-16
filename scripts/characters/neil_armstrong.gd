@@ -19,6 +19,31 @@ func get_gravity_multiplier() -> float:
 		return 0.4
 	return base_gravity_multiplier
 
+func _physics_process(delta: float) -> void:
+	if not is_active_character:
+		apply_passive_physics(delta)
+		return
+
+	apply_gravity(delta)
+	handle_jump()
+	handle_movement()
+	
+	# Tambahkan manipulasi gaya dorong Cosmic Storm ke mekanika pergerakan utama sebelum move_and_slide()
+	apply_cosmic_storm_force()
+	
+	handle_special_abilities(delta)
+	
+	move_and_slide()
+
+func apply_cosmic_storm_force() -> void:
+	if not is_in_dream:
+		return
+		
+	var moon_env = get_parent().get_node_or_null("../DimensionManager/MoonEnvironment")
+	if moon_env and moon_env.is_storm_active:
+		# Karakter terhembus perlahan menuju arah badai kosmik
+		velocity.x += moon_env.storm_direction * moon_env.storm_force
+
 func handle_special_abilities(delta: float) -> void:
 	if is_in_dream:
 		has_started_dream = true
@@ -33,8 +58,13 @@ func handle_special_abilities(delta: float) -> void:
 	var is_moon_frozen = main_level.dream_freeze_timers.get("Armstrong", 0.0) > 0.0
 	
 	if is_in_dream or not is_moon_frozen:
-		oxygen_level -= oxygen_consumption_rate * delta
-		#print("Sisa Oksigen Armstrong: ", max(0.0, oxygen_level), " detik")
+		# Modifikasi laju oksigen: Jika badai aktif, konsumsi oksigen dikalikan 2
+		var current_rate = oxygen_consumption_rate
+		var moon_env = get_parent().get_node_or_null("../DimensionManager/MoonEnvironment")
+		if is_in_dream and moon_env and moon_env.is_storm_active:
+			current_rate *= 2.0
+			
+		oxygen_level -= current_rate * delta
 		
 		if oxygen_level <= 0:
 			oxygen_level = 0.0
