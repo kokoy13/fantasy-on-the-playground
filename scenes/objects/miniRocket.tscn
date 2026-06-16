@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cfpuo5qppqmh5"]
+
+[ext_resource type="Texture2D" uid="uid://d0b0bbss0ps5a" path="res://icon.svg" id="1_4fx6o"]
+[ext_resource type="Script" uid="uid://b07hjbjw21ear" path="res://scripts/objects/mini_rocket.gd" id="1_bri08"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bri08"]
+size = Vector2(54, 121)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4fx6o"]
+size = Vector2(116, 159)
+
+[node name="MiniRocket" type="CharacterBody2D" unique_id=1454662715]
+collision_layer = 4
+script = ExtResource("1_bri08")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=101174390]
+position = Vector2(0.49999952, 0)
+scale = Vector2(0.4765625, 1)
+texture = ExtResource("1_4fx6o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2048707206]
+position = Vector2(1, -1.5)
+shape = SubResource("RectangleShape2D_bri08")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1376731237]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2143772895]
+position = Vector2(2, -4.5)
+shape = SubResource("RectangleShape2D_4fx6o")

@@ -12,9 +12,14 @@ var noChar: int = 0
 var current_hp: int
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_active_character: bool = false
+var is_in_dream: bool = false
+
+var saved_reality_x: float = 0.0
+var saved_dream_position: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	current_hp = max_hp
+	saved_dream_position = global_position
 
 func _physics_process(delta: float) -> void:
 	if not is_active_character:
@@ -30,15 +35,18 @@ func _physics_process(delta: float) -> void:
 
 func apply_gravity(delta: float) -> void:
 	if not is_on_floor():
-		velocity.y += gravity * base_gravity_multiplier * delta
+		velocity.y += gravity * get_gravity_multiplier() * delta
 
 func apply_passive_physics(delta: float) -> void:
 	if not is_on_floor():
-		velocity.y += gravity * base_gravity_multiplier * delta
+		velocity.y += gravity * get_gravity_multiplier() * delta
 		move_and_slide()
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		move_and_slide()
+
+func get_gravity_multiplier() -> float:
+	return base_gravity_multiplier
 
 func handle_jump() -> void:
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():

@@ -10,9 +10,12 @@
 [ext_resource type="Shader" uid="uid://chwbuqege5j1e" path="res://shaders/crt_effect.gdshader" id="7_wgf5c"]
 [ext_resource type="Script" uid="uid://bnxe400bfl1wx" path="res://scripts/characters/neil_armstrong.gd" id="9_5lr2e"]
 [ext_resource type="Script" uid="uid://divuhfckh5nei" path="res://scripts/characters/arthur.gd" id="9_53ut4"]
+[ext_resource type="Script" uid="uid://bcexnydcmnj10" path="res://scripts/dimension_manager.gd" id="10_t8ony"]
+[ext_resource type="Texture2D" uid="uid://d0b0bbss0ps5a" path="res://icon.svg" id="11_m6nvp"]
+[ext_resource type="PackedScene" uid="uid://cfpuo5qppqmh5" path="res://scenes/objects/miniRocket.tscn" id="12_6x837"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yt6xa"]
-size = Vector2(4728, 191)
+size = Vector2(4728, 601)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u6dm2"]
 shader = ExtResource("7_wgf5c")
@@ -80,16 +83,44 @@ centered = false
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1335617422]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1174025645]
-position = Vector2(827, 785.5)
+position = Vector2(827, 990.5)
 shape = SubResource("RectangleShape2D_yt6xa")
 
 [node name="CharacterManager" type="Node2D" parent="." unique_id=1851331316]
 
 [node name="NeilArmstrong" parent="CharacterManager" unique_id=1771453839 instance=ExtResource("6_hgn2n")]
+position = Vector2(505, 238)
 script = ExtResource("9_5lr2e")
 
 [node name="Arthur" parent="CharacterManager" unique_id=1450489683 instance=ExtResource("6_hgn2n")]
+position = Vector2(78, 231)
 script = ExtResource("9_53ut4")
+
+[node name="DimensionManager" type="Node2D" parent="." unique_id=82584812]
+script = ExtResource("10_t8ony")
+
+[node name="RealityEnvironment" type="Node2D" parent="DimensionManager" unique_id=1433508839]
+
+[node name="Sprite2D" type="Sprite2D" parent="DimensionManager/RealityEnvironment" unique_id=653907318]
+position = Vector2(81, 396)
+texture = ExtResource("11_m6nvp")
+
+[node name="MoonEnvironment" type="Node2D" parent="DimensionManager" unique_id=1962103698]
+
+[node name="Sprite2D" type="Sprite2D" parent="DimensionManager/MoonEnvironment" unique_id=256924334]
+position = Vector2(507, 412)
+texture = ExtResource("11_m6nvp")
+
+[node name="MiniRocket" parent="DimensionManager/MoonEnvironment" unique_id=1454662715 instance=ExtResource("12_6x837")]
+position = Vector2(757, 176)
+
+[node name="WarzoneEnvironment" type="Node2D" parent="DimensionManager" unique_id=22137430]
+
+[node name="Sprite2D" type="Sprite2D" parent="DimensionManager/WarzoneEnvironment" unique_id=23872021]
+position = Vector2(147.23438, 376.5)
+scale = Vector2(1.2109375, 0.6953125)
+texture = ExtResource("11_m6nvp")
+offset = Vector2(-250, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1096387199]
 
