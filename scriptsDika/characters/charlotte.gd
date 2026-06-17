@@ -1,6 +1,7 @@
 extends BaseCharacterResource
 
 @export var max_mana: int = 5
+@onready var anim = $AnimationPlayer
 var has_started_dream: bool = false
 var current_mana: int
 
@@ -8,6 +9,7 @@ var is_skill_spelling:bool = false
 
 func _ready() -> void:
 	super()
+	anim.play("idle")
 	current_mana = max_mana
 	character_name = "Charlotte"
 	dream_dimension_name = "Hutan Dongeng"
@@ -32,6 +34,8 @@ func handle_special_abilities(_delta: float) -> void:
 		_thunder_spell()
 
 func _healing_spell() -> void:
+	if not is_in_dream:
+		return
 	if current_mana < 1:
 		print("Mana tidak cukup untuk Healing!")
 		return
@@ -54,6 +58,8 @@ func _healing_spell() -> void:
 	is_skill_spelling = false
 
 func _thunder_spell() -> void:
+	if not is_in_dream:
+		return
 	if current_mana < 1:
 		print("Mana tidak cukup untuk Thunder!")
 		return

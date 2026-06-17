@@ -8,13 +8,26 @@
 [ext_resource type="Texture2D" uid="uid://d0xo2de2rqrs5" path="res://assets/background/testParallax2/lampu_tiang.png" id="6_g04qb"]
 [ext_resource type="PackedScene" uid="uid://bs66w6uidtn8f" path="res://scenes/characters/shaneleech.tscn" id="9_4eecq"]
 [ext_resource type="PackedScene" uid="uid://dodjathdg5op2" path="res://scenes/characters/charlotte.tscn" id="9_yhrca"]
-[ext_resource type="Script" uid="uid://dq5tnrr5yaiht" path="res://scriptsDika/characters/charlotte.gd" id="10_4eecq"]
 [ext_resource type="Script" uid="uid://bal37mclduiu5" path="res://scriptsDika/characters/shaneleech.gd" id="10_b3p8y"]
+[ext_resource type="Script" uid="uid://sm5nwef5hr5g" path="res://scriptsDika/environments/forestEnvironment.gd" id="11_b4tpv"]
+[ext_resource type="Shader" uid="uid://d1ugrkx3rywux" path="res://shaders/fog_shader.gdshader" id="12_b4tpv"]
 [ext_resource type="PackedScene" uid="uid://dww7u4uq62xbb" path="res://scenes/objects/mana_altar.tscn" id="12_hgky1"]
+[ext_resource type="PackedScene" uid="uid://cugkot7ffwj5t" path="res://scenes/objects/guiding_latern.tscn" id="14_hkuam"]
 [ext_resource type="Shader" uid="uid://chwbuqege5j1e" path="res://shaders/crt_effect.gdshader" id="17_hlvfl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yt6xa"]
 size = Vector2(9150, 601)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b4tpv"]
+shader = ExtResource("12_b4tpv")
+shader_parameter/fog_color = Color(0.0060773017, 0, 0, 0.9019608)
+shader_parameter/player_world_pos = Vector2(0, 0)
+shader_parameter/hole_radius = 70.000003325
+shader_parameter/blur_amount = 80.0
+shader_parameter/fog_opacity = 0.0
+shader_parameter/lantern_positions = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/lantern_radii = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/active_lantern_count = 0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u6dm2"]
 shader = ExtResource("17_hlvfl")
@@ -90,14 +103,8 @@ shape = SubResource("RectangleShape2D_yt6xa")
 [node name="Charlotte" parent="CharacterManager" unique_id=1432867270 instance=ExtResource("9_yhrca")]
 z_index = 1
 position = Vector2(503, 215)
-script = ExtResource("10_4eecq")
-max_mana = 5
 character_name = "Charlotte"
 dream_dimension_name = "Hutan Dongeng"
-max_hp = 5
-speed = 400.0
-jump_velocity = -600.0
-base_gravity_multiplier = 1.0
 
 [node name="ShaneLeech" parent="CharacterManager" unique_id=1441538568 instance=ExtResource("9_4eecq")]
 position = Vector2(143, 212)
@@ -107,13 +114,26 @@ dream_dimension_name = "Kota Metropolitan"
 
 [node name="DimensionManager" type="Node2D" parent="." unique_id=33687486]
 
+[node name="RealityEnvironment" type="Node2D" parent="DimensionManager" unique_id=1433508839]
+
 [node name="ForestEnvironment" type="Node2D" parent="DimensionManager" unique_id=983306458]
+script = ExtResource("11_b4tpv")
 
 [node name="ManaAltar" parent="DimensionManager/ForestEnvironment" unique_id=76059911 instance=ExtResource("12_hgky1")]
 position = Vector2(725, 625)
 scale = Vector2(2, 2)
 
-[node name="RealityEnvironment" type="Node2D" parent="DimensionManager" unique_id=1433508839]
+[node name="FogCanvas" type="CanvasLayer" parent="DimensionManager/ForestEnvironment" unique_id=1872537968]
+
+[node name="FogOverlay" type="ColorRect" parent="DimensionManager/ForestEnvironment/FogCanvas" unique_id=1172422611]
+z_index = 10
+material = SubResource("ShaderMaterial_b4tpv")
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="GuidingLantern" parent="DimensionManager/ForestEnvironment" unique_id=1217483550 instance=ExtResource("14_hkuam")]
+position = Vector2(1105, 648)
+scale = Vector2(1.5, 1.5)
 
 [node name="MetropolitanEnvironment" type="Node2D" parent="DimensionManager" unique_id=1492881708]
 

@@ -13,6 +13,8 @@ func _ready() -> void:
 		area_2d.body_entered.connect(_on_area_2d_body_entered)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	if not is_visible_in_tree():
+		return
 	if is_used:
 		return
 		

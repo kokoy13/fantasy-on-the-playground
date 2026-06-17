@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cugkot7ffwj5t"]
+
+[ext_resource type="Texture2D" uid="uid://5308nfpwdv8i" path="res://assets/art/dreams/lattern.png" id="1_0g1nv"]
+[ext_resource type="Script" uid="uid://c11nt4ebi6hv" path="res://scriptsDika/objects/guiding_lantern.gd" id="1_gvqcf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvqcf"]
+size = Vector2(25, 51)
+
+[node name="GuidingLantern" type="Node2D" unique_id=1217483550]
+script = ExtResource("1_gvqcf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=653799727]
+texture = ExtResource("1_0g1nv")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=799552503]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1055971689]
+position = Vector2(0.5, 2.5)
+shape = SubResource("RectangleShape2D_gvqcf")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_area_2d_body_exited"]
