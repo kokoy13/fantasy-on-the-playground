@@ -123,6 +123,10 @@ script = ExtResource("11_b4tpv")
 position = Vector2(725, 625)
 scale = Vector2(2, 2)
 
+[node name="GuidingLantern" parent="DimensionManager/ForestEnvironment" unique_id=1217483550 instance=ExtResource("14_hkuam")]
+position = Vector2(1105, 648)
+scale = Vector2(1.5, 1.5)
+
 [node name="FogCanvas" type="CanvasLayer" parent="DimensionManager/ForestEnvironment" unique_id=1872537968]
 
 [node name="FogOverlay" type="ColorRect" parent="DimensionManager/ForestEnvironment/FogCanvas" unique_id=1172422611]
@@ -130,10 +134,6 @@ z_index = 10
 material = SubResource("ShaderMaterial_b4tpv")
 offset_right = 1280.0
 offset_bottom = 720.0
-
-[node name="GuidingLantern" parent="DimensionManager/ForestEnvironment" unique_id=1217483550 instance=ExtResource("14_hkuam")]
-position = Vector2(1105, 648)
-scale = Vector2(1.5, 1.5)
 
 [node name="MetropolitanEnvironment" type="Node2D" parent="DimensionManager" unique_id=1492881708]
 

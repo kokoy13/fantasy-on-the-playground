@@ -19,7 +19,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		return
 		
 	if body.has_method("restore_mana"):
-		print("✨ Altar mendeteksi ", body.name)
 		var is_success = body.restore_mana(mana_restore_amount)
 		
 		if is_success:
