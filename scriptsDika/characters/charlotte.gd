@@ -4,6 +4,7 @@ extends BaseCharacterResource
 @onready var anim = $AnimationPlayer
 var has_started_dream: bool = false
 var current_mana: int
+@export var skill_range: float = 180.0
 
 var is_skill_spelling:bool = false
 
@@ -28,8 +29,8 @@ func handle_jump() -> void:
 func handle_special_abilities(_delta: float) -> void:
 	if Input.is_action_just_pressed("spell_e"):
 		_healing_spell()
-	#elif Input.is_action_just_pressed("spell_r"):
-		#_cast_levitation_spell()
+	elif Input.is_action_just_pressed("spell_r"):
+		_levitation_spell()
 	elif Input.is_action_just_pressed("spell_t"):
 		_thunder_spell()
 
@@ -56,6 +57,35 @@ func _healing_spell() -> void:
 	print("Bertapa selesai! HP bertambah 1. HP saat ini: ", current_hp)
 	
 	is_skill_spelling = false
+
+func _levitation_spell() -> void:
+	if not is_in_dream:
+		return
+	if current_mana < 1:
+		print("Mana tidak cukup untuk Levitation!")
+		return
+		
+	var objects = get_tree().get_nodes_in_group("levitable_objects")
+	var target_found: Node2D = null
+	var closest_distance: float = skill_range
+	
+	for obj in objects:
+		if obj is RigidBody2D:
+			var distance = global_position.distance_to(obj.global_position)
+			# Hanya ambil objek yang masuk dalam radius jangkauan mantra
+			if distance <= closest_distance:
+				closest_distance = distance
+				target_found = obj
+				
+	# 3. EKSEKUSI MANTRA JIKA OBJEK DITEMUKAN
+	if target_found:
+		current_mana -= 1 # Potong mana 1 poin
+		print("Charlotte merapal Levitation! Sisa Mana: ", current_mana)
+		
+		# Tembak fungsi angkat milik si kotak target
+		target_found.apply_levitation()
+	else:
+		print("Tidak ada objek yang terdeteksi")
 
 func _thunder_spell() -> void:
 	if not is_in_dream:

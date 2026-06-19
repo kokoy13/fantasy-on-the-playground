@@ -12,7 +12,9 @@
 [ext_resource type="Script" uid="uid://sm5nwef5hr5g" path="res://scriptsDika/environments/forestEnvironment.gd" id="11_b4tpv"]
 [ext_resource type="Shader" uid="uid://d1ugrkx3rywux" path="res://shaders/fog_shader.gdshader" id="12_b4tpv"]
 [ext_resource type="PackedScene" uid="uid://dww7u4uq62xbb" path="res://scenes/objects/mana_altar.tscn" id="12_hgky1"]
+[ext_resource type="PackedScene" uid="uid://b4vlql461djxu" path="res://scenes/obstacles/rock.tscn" id="14_f3b2k"]
 [ext_resource type="PackedScene" uid="uid://cugkot7ffwj5t" path="res://scenes/objects/guiding_latern.tscn" id="14_hkuam"]
+[ext_resource type="PackedScene" uid="uid://ds7oye4473j7" path="res://scenes/enemies/evilspirit.tscn" id="15_f3b2k"]
 [ext_resource type="Shader" uid="uid://chwbuqege5j1e" path="res://shaders/crt_effect.gdshader" id="17_hlvfl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yt6xa"]
@@ -134,6 +136,12 @@ z_index = 10
 material = SubResource("ShaderMaterial_b4tpv")
 offset_right = 1280.0
 offset_bottom = 720.0
+
+[node name="Rock" parent="DimensionManager/ForestEnvironment" unique_id=1861848053 instance=ExtResource("14_f3b2k")]
+position = Vector2(1407, 669)
+
+[node name="Evilspirit" parent="DimensionManager/ForestEnvironment" unique_id=1396738585 instance=ExtResource("15_f3b2k")]
+position = Vector2(1966, 593)
 
 [node name="MetropolitanEnvironment" type="Node2D" parent="DimensionManager" unique_id=1492881708]
 

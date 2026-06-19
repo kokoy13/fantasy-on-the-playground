@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://b4vlql461djxu"]
+
+[ext_resource type="Script" uid="uid://dxe38eawfes5x" path="res://scriptsDika/obstacles/rock.gd" id="1_eauog"]
+[ext_resource type="Texture2D" uid="uid://dlsowi7siyjbm" path="res://assets/art/dreams/rock/Rock Pile 8 - WHITE - BIG.PNG" id="2_gung0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h5txw"]
+radius = 19.993378
+height = 62.082397
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gung0"]
+size = Vector2(60, 6)
+
+[node name="Rock" type="RigidBody2D" unique_id=1861848053]
+script = ExtResource("1_eauog")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1860687396]
+texture = ExtResource("2_gung0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1465919329]
+rotation = -1.5965302
+shape = SubResource("CapsuleShape2D_h5txw")
+
+[node name="SlamArea" type="Area2D" parent="." unique_id=1799898773]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlamArea" unique_id=816329192]
+position = Vector2(0, 24)
+shape = SubResource("RectangleShape2D_gung0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_impact"]
